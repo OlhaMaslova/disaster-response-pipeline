@@ -64,7 +64,7 @@ def save_data(df: pd.DataFrame, database_filename: str):
 
     :return: None
     """
-    engine = create_engine('sqlite:///{}.db'.format(database_filename))
+    engine = create_engine('sqlite:///{}'.format(database_filename))
     df.to_sql('messages', engine, index=False)
 
 
