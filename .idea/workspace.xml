@@ -37,6 +37,13 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="hiddenUrls">
+      <set>
+        <option value="git@github.com:OlhaMaslova/disaster-response-pipeline.git" />
+      </set>
+    </option>
+  </component>
   <component name="ProjectId" id="1ujDIrx4v0iyZ2PMe6CMkpKdIZ0" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -72,7 +79,7 @@
       <workItem from="1626893764867" duration="32000" />
       <workItem from="1626893900507" duration="253000" />
       <workItem from="1627413805297" duration="8690000" />
-      <workItem from="1627662824020" duration="12307000" />
+      <workItem from="1627662824020" duration="12828000" />
     </task>
     <task id="LOCAL-00001" summary="basic train classifier.&#10; -evaluation is incomplete">
       <created>1625767268145</created>
@@ -92,14 +99,19 @@
     <option name="LAST_COMMIT_MESSAGE" value="basic train classifier.&#10; -evaluation is incomplete" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="335" y="72" key="CommitChangelistDialog2" timestamp="1625767268002">
-      <screen x="0" y="23" width="1680" height="1027" />
+    <state x="192" y="0" key="CommitChangelistDialog2" timestamp="1627931504860">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
+    <state x="192" y="0" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1627931504860" />
     <state x="335" y="72" key="CommitChangelistDialog2/0.23.1680.1027@0.23.1680.1027" timestamp="1625767268002" />
     <state width="261" height="548" key="HiddenNamespacesPopup" timestamp="1627501019704">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state width="261" height="548" key="HiddenNamespacesPopup/0.0.1680.1050@0.0.1680.1050" timestamp="1627501019704" />
+    <state x="506" y="350" key="VCS.EditChangelistDialog" timestamp="1627931553316">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="506" y="350" key="VCS.EditChangelistDialog/0.0.1440.900@0.0.1440.900" timestamp="1627931553316" />
     <state x="301" y="0" width="838" height="1060" key="search.everywhere.popup" timestamp="1627930173862">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
