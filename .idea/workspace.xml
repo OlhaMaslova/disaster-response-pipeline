@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="275bc978-6058-4e78-b4ca-647b1ef58d76" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/my_love.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/run.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/master.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/master.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/DisasterResponse.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/process_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/process_data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/train_classifier.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/train_classifier.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +71,7 @@
       <workItem from="1626893764867" duration="32000" />
       <workItem from="1626893900507" duration="253000" />
       <workItem from="1627413805297" duration="8690000" />
-      <workItem from="1627662824020" duration="11160000" />
+      <workItem from="1627662824020" duration="11635000" />
     </task>
     <task id="LOCAL-00001" summary="basic train classifier.&#10; -evaluation is incomplete">
       <created>1625767268145</created>
