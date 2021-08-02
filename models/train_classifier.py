@@ -4,10 +4,9 @@ import sys
 
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.multioutput import MultiOutputClassifier
-from sklearn.multiclass import OneVsRestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.metrics import classification_report
 from sklearn.pipeline import Pipeline
 from sqlalchemy import create_engine
 
@@ -17,6 +16,8 @@ from nltk.corpus import stopwords
 
 import pandas as pd
 import numpy as np
+
+import joblib
 import nltk
 
 # nltk.download('punkt')
@@ -36,9 +37,14 @@ def load_data(database_filepath: str):
     engine = create_engine('sqlite:///{}'.format(database_filepath))
     # load the data
     df = pd.read_sql_table('messages', engine)
+
+    # drop rows with incorrect data
+    df = df[df.related != 2]
+
     # split into X & y
     X = df.message.to_numpy()
-    y = df.iloc[:, 4:].to_numpy()
+    y = df.iloc[:, 4:].values
+
     # get category names
     category_names = list(df.columns[4:])
 
@@ -78,7 +84,7 @@ def build_model():
     pipeline = Pipeline([
         ('vect', CountVectorizer(tokenizer=tokenize)),
         ('tfidf', TfidfTransformer()),
-        ('clf', OneVsRestClassifier(RandomForestClassifier()))
+        ('clf', MultiOutputClassifier(RandomForestClassifier()))
     ])
 
     return pipeline
@@ -94,11 +100,13 @@ def evaluate_model(model, X_test, Y_test, category_names):
     :return: classification report
     """
     print('Predicting ...')
-    y_pred = model.predict(X_test)
-    accuracy = (y_pred == Y_test).mean()
-    print("Accuracy:", accuracy)
+    Y_pred = model.predict(X_test)
 
-    print(classification_report(np.argmax(Y_test, axis=1), y_pred, target_names=category_names))
+    print(classification_report(
+        Y_test,
+        np.array([x[:] for x in Y_pred]),
+        target_names=category_names)
+    )
 
 
 def save_model(model, model_filepath: str):
@@ -116,7 +124,7 @@ def main():
         database_filepath, model_filepath = sys.argv[1:]
         print('Loading data...\n    DATABASE: {}'.format(database_filepath))
         X, Y, category_names = load_data(database_filepath)
-        X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
+        X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.33)
 
         print('Building model...')
         model = build_model()
@@ -124,17 +132,18 @@ def main():
         print('Training model...')
         model.fit(X_train, Y_train)
 
+        # print('Loading model...')
+        # model = joblib.load("classifier.pkl")
+
         print('Evaluating model...')
         try:
             evaluate_model(model, X_test, Y_test, category_names)
-        except Exception:
-            print('evaluation failed')
+        except Exception as e:
+            print('evaluation failed', e)
 
         print('Saving model...\n    MODEL: {}'.format(model_filepath))
         save_model(model, model_filepath)
-
         print('Trained model saved!')
-
     else:
         print('Please provide the filepath of the disaster messages database ' \
               'as the first argument and the filepath of the pickle file to ' \

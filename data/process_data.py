@@ -50,7 +50,15 @@ def clean_data(df: pd.DataFrame):
     df_new.drop('categories', axis=1, inplace=True)
 
     # drop duplicates
-    df_new = df.drop_duplicates()
+    df_new = df_new.drop_duplicates()
+
+    df_new['no_category'] = 0
+    df_new.loc[df_new.iloc[:, 4:].sum(axis=1) == 0, 'no_category'] = 1
+
+    # drop child_alone column as it has no values.
+    df_new.drop(columns='child_alone', inplace=True)
+
+    print(df_new)
 
     return df_new
 
@@ -65,7 +73,7 @@ def save_data(df: pd.DataFrame, database_filename: str):
     :return: None
     """
     engine = create_engine('sqlite:///{}'.format(database_filename))
-    df.to_sql('messages', engine, index=False)
+    df.to_sql('messages', engine, index=False, if_exists='replace')
 
 
 def main():

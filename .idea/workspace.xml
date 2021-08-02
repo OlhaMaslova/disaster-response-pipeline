@@ -1,13 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="275bc978-6058-4e78-b4ca-647b1ef58d76" name="Default Changelist" comment="" />
+    <list default="true" id="275bc978-6058-4e78-b4ca-647b1ef58d76" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/my_love.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/run.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/master.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/master.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/DisasterResponse.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/process_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/process_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/train_classifier.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/train_classifier.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="DisasterResponse" type="feb32156:DbDataSourceImpl" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="olha maslova" />
+      </list>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1ujDIrx4v0iyZ2PMe6CMkpKdIZ0" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -15,8 +54,14 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/data" />
+    </key>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -28,17 +73,44 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1625170028159</updated>
-      <workItem from="1625170035325" duration="3126000" />
+      <workItem from="1625170035325" duration="13657000" />
+      <workItem from="1625752267171" duration="2061000" />
+      <workItem from="1625960332212" duration="167000" />
+      <workItem from="1626893083040" duration="73000" />
+      <workItem from="1626893764867" duration="32000" />
+      <workItem from="1626893900507" duration="253000" />
+      <workItem from="1627413805297" duration="8690000" />
+      <workItem from="1627662824020" duration="11160000" />
     </task>
+    <task id="LOCAL-00001" summary="basic train classifier.&#10; -evaluation is incomplete">
+      <created>1625767268145</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1625767268145</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="basic train classifier.&#10; -evaluation is incomplete" />
+    <option name="LAST_COMMIT_MESSAGE" value="basic train classifier.&#10; -evaluation is incomplete" />
+  </component>
   <component name="WindowStateProjectService">
-    <state x="301" y="23" width="838" height="1032" key="search.everywhere.popup" timestamp="1625170327564">
+    <state x="335" y="72" key="CommitChangelistDialog2" timestamp="1625767268002">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state x="335" y="72" key="CommitChangelistDialog2/0.23.1680.1027@0.23.1680.1027" timestamp="1625767268002" />
+    <state width="261" height="548" key="HiddenNamespacesPopup" timestamp="1627501019704">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state width="261" height="548" key="HiddenNamespacesPopup/0.0.1680.1050@0.0.1680.1050" timestamp="1627501019704" />
+    <state x="301" y="23" width="838" height="1032" key="search.everywhere.popup" timestamp="1625582929916">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state x="301" y="23" width="838" height="1032" key="search.everywhere.popup/0.23.1440.877@0.23.1440.877" timestamp="1625170327564" />
+    <state x="301" y="23" width="838" height="1032" key="search.everywhere.popup/0.23.1440.877@0.23.1440.877" timestamp="1625582929916" />
   </component>
 </project>
