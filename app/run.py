@@ -1,15 +1,14 @@
 import json
-import plotly
-import pandas as pd
 
+from flask import Flask, jsonify, render_template, request
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
-
-from flask import Flask
-from flask import render_template, request, jsonify
-from plotly.graph_objs import Bar
-import joblib
+from plotly.graph_objs import Bar, Heatmap
 from sqlalchemy import create_engine
+
+import joblib
+import pandas as pd
+import plotly
 
 app = Flask(__name__)
 
@@ -27,11 +26,11 @@ def tokenize(text):
 
 
 # load data
-engine = create_engine('sqlite:///../data/DisasterResponse.db')
+engine = create_engine('sqlite:///data/DisasterResponse.db')
 df = pd.read_sql_table('messages', engine)
 
 # load model
-model = joblib.load("../models/classifier.pkl")
+model = joblib.load("./models/classifier.pkl")
 
 
 # index web page displays cool visuals and receives user input text for model
@@ -45,16 +44,23 @@ def index():
     print('genre_counts', genre_counts)
     genre_names = list(genre_counts.index)
     print('genre_names', genre_names)
+    agg_df = df.sum()[3:].sort_values()
+
+    # categories correlation
+    categories = df.iloc[:, 4:]
+    category_names = list(categories.columns)
+    categories_corr = categories.corr().values
 
     # create visuals
     # TODO: Below is an example - modify to create your own visuals
     graphs = [
+        # Distribution of Message Genres
         {
             'data': [
                 Bar(
                     x=genre_names,
                     y=genre_counts
-                )
+                ),
             ],
 
             'layout': {
@@ -63,10 +69,50 @@ def index():
                     'title': "Count"
                 },
                 'xaxis': {
-                    'title': "Genre"
+                    'title': "Genre",
+                    'automargin': True
                 }
             }
-        }
+        },
+
+        # Distribution of Message Categories
+        {
+            'data': [
+                Bar(
+                    x=agg_df.index,
+                    y=agg_df.values
+                )
+            ],
+
+            'layout': {
+                'title': 'Distribution of Message Categories',
+                'yaxis': {
+                    'title': "Count"
+                },
+                'xaxis': {
+                    'title': "Category",
+                    'tickangle': -45,
+                    'automargin': True
+                }
+            }
+        },
+
+        # Category Correlation Heatmap
+        {
+            'data': [
+                Heatmap(
+                    x=category_names,
+                    y=category_names,
+                    z=categories_corr
+                )
+            ],
+
+            'layout': {
+                'title': 'Correlation Heatmap of Categories',
+                'xaxis': {'tickangle': -45, 'automargin': True},
+                'yaxis': {'automargin': True}
+            }
+        },
     ]
 
     # encode plotly graphs in JSON
