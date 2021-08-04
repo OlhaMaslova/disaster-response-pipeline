@@ -25,13 +25,12 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="p-2"><a href="https://www.udacity.com/" style="color: #525c65">Made with Udacity</a></li>
-                <li class="p-2"><a href="https://github.com/OlhaMaslova" style="color: #525c65">About</a></li>
+                <li class="p-2"><a href="/about" style="color: #525c65">About</a></li>
                 <li class="p-2"><a href="https://github.com/OlhaMaslova" style="color: #525c65">Contact</a></li>
             </ul>
         </div>
     </div>
 </nav>
-
 
 <div class="jumbotron">
     <div class="container">
@@ -77,6 +76,7 @@
         <div id="{{id}}"></div>
     {% endfor %}
 </div>
+
 <div class='p-5'>
     <script type="text/javascript">
         const graphs = {{ graphJSON | safe}};

@@ -142,6 +142,12 @@ def go():
         classification_result=classification_results
     )
 
+@app.route('/about')
+def about():
+
+    # This will render the go.html Please see that file. 
+    return render_template('about.html')
+
 
 def main():
     app.run(host='0.0.0.0', port=3001, debug=True)

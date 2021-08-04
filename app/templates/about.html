@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Disasters</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.3.0.min.js"></script>
+</head>
+
+<nav class="navbar navbar-expand-lg navbar-light navbar-fixed-top navbar-inverse">
+    <div class="container">
+        <a class="navbar-brand" href="/">Disaster Response Project</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="p-2"><a href="https://www.udacity.com/" style="color: #525c65">Made with Udacity</a></li>
+                <li class="p-2"><a href="/about" style="color: #525c65">About</a></li>
+                <li class="p-2"><a href="https://github.com/OlhaMaslova" style="color: #525c65">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="jumbotron">
+    <div class="container">
+        <h1>Project Overview</h1>
+            <div class="d-flex flex-row justify-content-between">
+                <div class="card m-3" style="width: 80rem;">
+                    <div class="card-body">
+                        <p class="card-text">
+                            Apply data engineering skills to analyze disaster data from Figure Eight to build a model for an API that classifies disaster
+                            messages. Provided data set contained real messages that were sent during disaster events. The goal is to create a machine learning 
+                            pipeline to categorize these events. The web app will also display visualizations of the data.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        <h2>Project Components</h2>
+
+        <div class="d-flex flex-row justify-content-between">
+            <div class="card m-3" style="width: 20rem;">
+                <div class="card-body">
+                    <h5 class="card-title">1. ETL Pipeline</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Writing a data cleaning pipeline</h6>
+                    <ul class="list-group">
+                        <li class="list-group-item">Loads the messages and categories datasets</li>
+                        <li class="list-group-item">Merges the two datasets</li>
+                        <li class="list-group-item">Cleans the data</li>
+                        <li class="list-group-item">Stores it in an SQLite database</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="card m-3" style="width: 20rem;">
+                <div class="card-body">
+                    <h5 class="card-title">2. ML Pipeline</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Writing a machine learning pipeline</h6>
+                    <ul class="list-group">
+                        <li class="list-group-item">Loads data from the SQLite database</li>
+                        <li class="list-group-item">Builds a text processing and machine learning pipeline</li>
+                        <li class="list-group-item">Trains and tunes a model using GridSearchCV</li>
+                        <li class="list-group-item">Outputs results on the test set</li>
+                        <li class="list-group-item">Exports the final model as a pickle file</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="card m-3" style="width: 20rem;">
+                <div class="card-body">
+                    <h5 class="card-title">3. Flask Web App</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Working with Flask skeleton provided by Udacity</h6>
+                    <ul class="list-group">
+                        <li class="list-group-item">Modify file paths for database and model as needed</li>
+                        <li class="list-group-item">Add data visualizations using Plotly</li>
+                    </ul>
+                </div>
+            </div>
+        </div>            
+    </div>
+</div>
