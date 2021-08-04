@@ -31,3 +31,17 @@ Build a web app that will prompt users to enter a message and return correspondi
    `python run.py`
 
 4. Go to http://0.0.0.0:3001/
+
+## Web application screenshots:
+
+![main](data/img/main.png)
+![main](data/img/genres.png)
+![main](data/img/categories.png)
+![main](data/img/corr.png)
+
+After entering the following message: "I would like to know if the earthquake is over."
+
+![main](data/img/classification1.png)
+![main](data/img/classification2.png)
+
+![main](data/img/about.png)
