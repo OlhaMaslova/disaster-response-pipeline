@@ -2,7 +2,7 @@
 
 ## Motivation:
 
-Apply software and data engineering skills to analyze disaster data to build a model for an API that classifies disaster messages. Using the web app an emergency worker can input a new message and get classification result in several categories such as "water", "fire", "food", etc.
+Apply software and data engineering skills to analyze disaster data to build a model for an API that classifies disaster messages. Using the web app an emergency worker can input a new message and get classification result in several categories such as "water", "fire", "food", etc. Such classification can help emergency workers notify an appropriate disaster relief agency.
 
 ## Data:
 
@@ -10,7 +10,25 @@ The dataset was provided by Figure Eight and contained real messages that were s
 
 ## Final Result:
 
-Build a web app that will prompt users to enter a message and return corresponding category predictions based on the ML pipeline.
+Web app that prompts users to enter a message and returns corresponding category predictions based on the ML pipeline.
+
+## Files in the repository:
+
+app
+| - templates
+| |- master.html # main page of web app
+| |- go.html # classification result page of web app
+| |- about.html # about page of the project
+|- run.py # Flask file that runs app
+data
+|- disaster_categories.csv # data to process
+|- disaster_messages.csv # data to process
+|- process_data.py
+|- DisasterResponse.db # database to save clean data to
+models
+|- train_classifier.py
+|- classifier.pkl # saved model
+README.md
 
 ## Instructions:
 
