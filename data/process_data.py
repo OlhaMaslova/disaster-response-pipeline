@@ -58,7 +58,9 @@ def clean_data(df: pd.DataFrame):
     # drop child_alone column as it has no values.
     df_new.drop(columns='child_alone', inplace=True)
 
-    print(df_new)
+    # unclear what 2 represents in this case.
+    # drop 188 rows
+    df_new = df_new[df_new.related != 2]
 
     return df_new
 
