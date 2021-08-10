@@ -5,7 +5,10 @@ import sys
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.multioutput import MultiOutputClassifier
 from sklearn.model_selection import train_test_split
+
 from sklearn.ensemble import RandomForestClassifier
+from sklearn import svm
+
 from sklearn.metrics import classification_report
 from sklearn.pipeline import Pipeline
 from sqlalchemy import create_engine
@@ -19,7 +22,9 @@ import numpy as np
 
 import joblib
 import nltk
+from sklearn.model_selection._search import GridSearchCV
 
+# Uncomment these to download necessary packages
 # nltk.download('punkt')
 # nltk.download('wordnet')
 # nltk.download('stopwords')
@@ -84,21 +89,28 @@ def build_model():
     pipeline = Pipeline([
         ('vect', CountVectorizer(tokenizer=tokenize)),
         ('tfidf', TfidfTransformer()),
-        ('clf', MultiOutputClassifier(RandomForestClassifier()))
+        ('clf', RandomForestClassifier())
     ])
 
-    return pipeline
+    parameters = {
+        'clf__n_estimators': [50, 200],
+        'clf__min_samples_split': [2, 4],
+    }
+
+    cv = GridSearchCV(pipeline, param_grid=parameters, scoring="accuracy")
+
+    return cv
 
 
 def evaluate_model(model, X_test, Y_test, category_names):
     """
-
     :param model: model to be evaluated
     :param X_test: test features
     :param Y_test: test labels
     :param category_names: list of category names
     :return: classification report
     """
+
     print('Predicting ...')
     Y_pred = model.predict(X_test)
 
@@ -111,7 +123,6 @@ def evaluate_model(model, X_test, Y_test, category_names):
 
 def save_model(model, model_filepath: str):
     """
-
     :param model: model to be saved
     :param model_filepath: path (str) where to save the model
     :return: None
@@ -124,7 +135,8 @@ def main():
         database_filepath, model_filepath = sys.argv[1:]
         print('Loading data...\n    DATABASE: {}'.format(database_filepath))
         X, Y, category_names = load_data(database_filepath)
-        X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.33)
+        X_train, X_test, Y_train, Y_test = train_test_split(
+            X, Y, test_size=0.33)
 
         print('Building model...')
         model = build_model()
@@ -145,9 +157,9 @@ def main():
         save_model(model, model_filepath)
         print('Trained model saved!')
     else:
-        print('Please provide the filepath of the disaster messages database ' \
-              'as the first argument and the filepath of the pickle file to ' \
-              'save the model to as the second argument. \n\nExample: python ' \
+        print('Please provide the filepath of the disaster messages database '
+              'as the first argument and the filepath of the pickle file to '
+              'save the model to as the second argument. \n\nExample: python '
               'train_classifier.py ../data/DisasterResponse.db classifier.pkl')
 
 
