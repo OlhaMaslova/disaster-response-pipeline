@@ -89,11 +89,11 @@ def build_model():
     pipeline = Pipeline([
         ('vect', CountVectorizer(tokenizer=tokenize)),
         ('tfidf', TfidfTransformer()),
-        ('clf', RandomForestClassifier())
+        ('clf', MultiOutputClassifier(RandomForestClassifier()))
     ])
 
     parameters = {
-        'clf__n_estimators': [50, 200],
+        'clf__n_estimators': [50, 100],
         'clf__min_samples_split': [2, 4],
     }
 
