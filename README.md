@@ -14,21 +14,23 @@ Web app that prompts users to enter a message and returns corresponding category
 
 ## Files in the repository:
 
-app
-| - templates
-| |- master.html # main page of web app
-| |- go.html # classification result page of web app
-| |- about.html # about page of the project
-|- run.py # Flask file that runs app
-data
-|- disaster_categories.csv # data to process
-|- disaster_messages.csv # data to process
-|- process_data.py
-|- DisasterResponse.db # database to save clean data to
-models
-|- train_classifier.py
-|- classifier.pkl # saved model
-README.md
+app<br>
+| - templates <br>
+| |- master.html # main page of web app <br>
+| |- go.html # classification result page of web app <br>
+| |- about.html # about page of the project <br>
+|- run.py # Flask file that runs app <br>
+data <br>
+|- disaster_categories.csv # data to process <br>
+|- disaster_messages.csv # data to process <br>
+|- process_data.py <br>
+|- DisasterResponse.db # database to save clean data to <br>
+|- ETL Pipeline Preparation.ipynb <br>
+models <br>
+|- train_classifier.py <br>
+|- ML Pipeline Preparation (1).ipynb <br>
+|- classifier.pkl # saved model <br>
+README.md <br>
 
 ## Instructions:
 
