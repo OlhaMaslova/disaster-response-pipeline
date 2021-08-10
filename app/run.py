@@ -30,7 +30,7 @@ engine = create_engine('sqlite:///data/DisasterResponse.db')
 df = pd.read_sql_table('messages', engine)
 
 # load model
-model = joblib.load("./models/classifier.pkl")
+model = joblib.load("models/classifier.pkl")
 
 
 # index web page displays cool visuals and receives user input text for model
@@ -38,12 +38,8 @@ model = joblib.load("./models/classifier.pkl")
 @app.route('/index')
 def index():
     # extract data needed for visuals
-    # TODO: Below is an example - modify to extract data for your own visuals
-    print(df)
     genre_counts = df.groupby('genre').count()['message']
-    print('genre_counts', genre_counts)
     genre_names = list(genre_counts.index)
-    print('genre_names', genre_names)
     agg_df = df.sum()[3:].sort_values()
 
     # categories correlation
@@ -52,7 +48,6 @@ def index():
     categories_corr = categories.corr().values
 
     # create visuals
-    # TODO: Below is an example - modify to create your own visuals
     graphs = [
         # Distribution of Message Genres
         {
@@ -119,8 +114,6 @@ def index():
     ids = ["graph-{}".format(i) for i, _ in enumerate(graphs)]
     graphJSON = json.dumps(graphs, cls=plotly.utils.PlotlyJSONEncoder)
 
-    print(ids)
-
     # render web page with plotly graphs
     return render_template('master.html', ids=ids, graphJSON=graphJSON)
 
@@ -135,17 +128,18 @@ def go():
     classification_labels = model.predict([query])[0]
     classification_results = dict(zip(df.columns[4:], classification_labels))
 
-    # This will render the go.html Please see that file. 
+    # This will render the go.html Please see that file.
     return render_template(
         'go.html',
         query=query,
         classification_result=classification_results
     )
 
+
 @app.route('/about')
 def about():
 
-    # This will render the go.html Please see that file. 
+    # This will render the go.html Please see that file.
     return render_template('about.html')
 
 

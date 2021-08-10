@@ -3,26 +3,24 @@ import re
 import sys
 
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
+from sklearn.model_selection._search import GridSearchCV
 from sklearn.multioutput import MultiOutputClassifier
 from sklearn.model_selection import train_test_split
-
-from sklearn.ensemble import RandomForestClassifier
-from sklearn import svm
-
 from sklearn.metrics import classification_report
-from sklearn.pipeline import Pipeline
-from sqlalchemy import create_engine
+from sklearn.pipeline import Pipeline, FeatureUnion
+from sklearn.ensemble import AdaBoostClassifier
 
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
+
+from sqlalchemy import create_engine
 
 import pandas as pd
 import numpy as np
 
 import joblib
 import nltk
-from sklearn.model_selection._search import GridSearchCV
 
 # Uncomment these to download necessary packages
 # nltk.download('punkt')
@@ -87,17 +85,27 @@ def build_model():
     :return: model
     """
     pipeline = Pipeline([
-        ('vect', CountVectorizer(tokenizer=tokenize)),
-        ('tfidf', TfidfTransformer()),
-        ('clf', MultiOutputClassifier(RandomForestClassifier()))
+        ('features', FeatureUnion([
+
+            ('text_pipeline', Pipeline([
+                ('count_vectorizer', CountVectorizer(tokenizer=tokenize)),
+                ('tfidf_transformer', TfidfTransformer())
+            ]))
+
+        ])),
+
+        ('classifier', MultiOutputClassifier(AdaBoostClassifier()))
     ])
 
-    parameters = {
-        'clf__estimator__n_estimators': [50, 200],
-        'clf__estimator__min_samples_split': [2, 4],
-    }
+    parameters = {'classifier__estimator__learning_rate': [0.01, 0.05],
+                  'classifier__estimator__n_estimators': [20, 50]}
 
-    cv = GridSearchCV(pipeline, param_grid=parameters, scoring="accuracy")
+    cv = GridSearchCV(
+        pipeline,
+        param_grid=parameters,
+        scoring='f1_micro',
+        n_jobs=-1
+    )
 
     return cv
 
@@ -114,11 +122,8 @@ def evaluate_model(model, X_test, Y_test, category_names):
     print('Predicting ...')
     Y_pred = model.predict(X_test)
 
-    print(classification_report(
-        Y_test,
-        np.array([x[:] for x in Y_pred]),
-        target_names=category_names)
-    )
+    print(classification_report(Y_test.values,
+          Y_pred, target_names=category_names))
 
 
 def save_model(model, model_filepath: str):
@@ -145,7 +150,7 @@ def main():
         model.fit(X_train, Y_train)
 
         # print('Loading model...')
-        # model = joblib.load("classifier.pkl")
+        # model = joblib.load("model/classifier.pkl")
 
         print('Evaluating model...')
         try:
@@ -160,7 +165,7 @@ def main():
         print('Please provide the filepath of the disaster messages database '
               'as the first argument and the filepath of the pickle file to '
               'save the model to as the second argument. \n\nExample: python '
-              'train_classifier.py ../data/DisasterResponse.db classifier.pkl')
+              'model/train_classifier.py data/DisasterResponse.db model/classifier.pkl')
 
 
 if __name__ == '__main__':
