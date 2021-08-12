@@ -108,8 +108,7 @@ Web app that prompts users to enter a message and returns corresponding category
 | cold                   | 0.50      | 0.03   | 0.05     | 177     |
 | other_weather          | 0.50      | 0.00   | 0.01     | 452     |
 | direct_report          | 0.80      | 0.11   | 0.19     | 1691    |
-| no_category 0.00       | 0.00      | 0.00   | 2058     |
-
+| no_category            | 0.00      | 0.00   | 0.00     | 2058    |
 | micro avg | 0.78 | 0.37 | 0.51 | 29307 |
 | macro avg | 0.53 | 0.14 | 0.17 | 29307 |
 | weighted avg | 0.68 | 0.37 | 0.40 | 29307 |
