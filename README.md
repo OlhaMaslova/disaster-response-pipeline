@@ -25,9 +25,12 @@ data <br>
 models <br>
 |- train_classifier.py <br>
 |- ML Pipeline Preparation (1).ipynb <br>
-|- classifier.pkl # saved model <br>
 README.md <br>
 requirements.txt #list of dependencies
+
+#### Note:
+The classifer.pkl is not uploaded due to the large size of the file. The initial run of the train_classifier.py will create a model in the specified directory. 
+Also note, that it might take a while due to cross validation.
 
 ## Instructions:
 
