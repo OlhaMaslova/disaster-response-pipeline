@@ -27,6 +27,7 @@ models <br>
 |- ML Pipeline Preparation (1).ipynb <br>
 |- classifier.pkl # saved model <br>
 README.md <br>
+requirements.txt #list of dependencies
 
 ## Instructions:
 
