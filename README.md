@@ -6,6 +6,16 @@
 
 Apply software and data engineering skills to analyze disaster data to build a model for an API that classifies disaster messages. Using the web app an emergency worker can input a new message and get classification result in several categories such as "water", "fire", "food", etc. Such classification can help emergency workers notify an appropriate disaster relief agency.
 
+## Classifier Description:
+- CountVectorizer
+- TfidfTransformer
+- AdaBoostClassifier
+- GridSearchCV
+
+#### Class Imbalance
+![main](data/img/categories.png)
+As you can see on the histogram above, we have a significant class imbalance. Since this is a Multilabel multiclass classification problem, we can't simply apply SMOTE to balance out classes. Therefore, I decided to calculate an oversampling ratio for each class. Then, for each message in the training set, I check the categories it belongs to and their corresponding oversampling ratios, keeping track of the **maximum one = r.** I then duplicate this message **r** number of times. 
+
 ## Files in the repository:
 
 ---
@@ -74,48 +84,48 @@ After entering the following message: "I would like to know if the earthquake is
 
 Web app that prompts users to enter a message and returns corresponding category predictions based on the ML pipeline.
 
-| Category               | precision | recall | f1-score | support |
-| ---------------------- | --------- | ------ | -------- | ------- |
-| related                | 0.76      | 1.00   | 0.86     | 6532    |
-| request                | 0.84      | 0.18   | 0.29     | 1510    |
-| offer                  | 0.00      | 0.00   | 0.00     | 48      |
-| aid_related            | 0.78      | 0.27   | 0.40     | 3578    |
-| medical_help           | 0.65      | 0.02   | 0.04     | 682     |
-| medical_products       | 0.83      | 0.01   | 0.02     | 429     |
-| search_and_rescue      | 0.75      | 0.01   | 0.03     | 233     |
-| security               | 0.00      | 0.00   | 0.00     | 142     |
-| military               | 0.50      | 0.00   | 0.01     | 283     |
-| water                  | 0.66      | 0.70   | 0.68     | 514     |
-| food                   | 0.76      | 0.69   | 0.72     | 943     |
-| shelter                | 0.83      | 0.30   | 0.44     | 752     |
-| clothing               | 0.83      | 0.08   | 0.15     | 118     |
-| money                  | 0.00      | 0.00   | 0.00     | 206     |
-| missing_people         | 0.33      | 0.01   | 0.02     | 95      |
-| refugees               | 0.75      | 0.02   | 0.04     | 280     |
-| death                  | 0.90      | 0.02   | 0.04     | 396     |
-| other_aid              | 0.71      | 0.00   | 0.01     | 1156    |
-| infrastructure_related | 0.00      | 0.00   | 0.00     | 563     |
-| transport              | 0.81      | 0.05   | 0.10     | 405     |
-| buildings              | 0.78      | 0.08   | 0.15     | 434     |
-| electricity            | 0.75      | 0.03   | 0.07     | 176     |
-| tools                  | 0.00      | 0.00   | 0.00     | 48      |
-| hospitals              | 0.00      | 0.00   | 0.00     | 95      |
-| shops                  | 0.00      | 0.00   | 0.00     | 44      |
-| aid_centers            | 0.00      | 0.00   | 0.00     | 100     |
-| other_infrastructure   | 0.00      | 0.00   | 0.00     | 372     |
-| weather_related        | 0.93      | 0.34   | 0.49     | 2386    |
-| floods                 | 0.91      | 0.35   | 0.50     | 690     |
-| storm                  | 0.82      | 0.07   | 0.13     | 807     |
-| fire                   | 0.33      | 0.01   | 0.02     | 100     |
-| earthquake             | 0.91      | 0.68   | 0.78     | 812     |
-| cold                   | 0.50      | 0.03   | 0.05     | 177     |
-| other_weather          | 0.50      | 0.00   | 0.01     | 452     |
-| direct_report          | 0.80      | 0.11   | 0.19     | 1691    |
-| no_category            | 0.00      | 0.00   | 0.00     | 2058    |
-| micro avg | 0.78 | 0.37 | 0.51 | 29307 |
-| macro avg | 0.53 | 0.14 | 0.17 | 29307 |
-| weighted avg | 0.68 | 0.37 | 0.40 | 29307 |
-| samples avg | 0.73 | 0.42 | 0.48 | 29307 |
+| Category | precision | recall | f1-score | support |
+| ---------------------- | -----| ------ | -------- | ------- |
+|                related | 0.76 | 1.00 | 0.86 | 4011 |
+|                request | 0.81 | 0.19 | 0.30 | 896 |
+|                  offer | 0.00 | 0.00 | 0.00 | 30 |
+|            aid_related | 0.42 | 1.00 | 0.59 | 2206 |
+|           medical_help | 0.72 | 0.04 | 0.08 | 437 |
+|       medical_products | 0.79 | 0.10 | 0.18 | 304 |
+|      search_and_rescue | 0.79 | 0.17 | 0.28 | 152 |
+|               security | 0.00 | 0.00 | 0.00 | 92 |
+|               military | 0.00 | 0.00 | 0.00 | 199 |
+|                  water | 0.63 | 0.75 | 0.68 | 346 |
+|                   food | 0.77 | 0.66 | 0.71 | 579 |
+|                shelter | 0.85 | 0.32 | 0.46 | 476 |
+|               clothing | 0.74 | 0.51 | 0.60 | 73 |
+|                  money | 1.00 | 0.02 | 0.04 | 110 |
+|         missing_people | 0.63 | 0.30 | 0.41 | 63 |
+|               refugees | 0.86 | 0.03 | 0.06 | 182 |
+|                  death | 1.00 | 0.03 | 0.05 | 252 |
+|              other_aid | 1.00 | 0.00 | 0.00 | 687 |
+| infrastructure_related | 0.55 | 0.02 | 0.03 | 335 |
+|              transport | 0.59 | 0.25 | 0.35 | 273 |
+|              buildings | 0.57 | 0.12 | 0.20 | 250 |
+|            electricity | 0.70 | 0.06 | 0.11 | 118 |
+|                  tools | 0.00 | 0.00 | 0.00 | 34 |
+|              hospitals | 0.29 | 0.03 | 0.06 | 62 |
+|                  shops | 0.00 | 0.00 | 0.00 | 25 |
+|            aid_centers | 0.00 | 0.00 | 0.00 | 58 |
+|   other_infrastructure | 0.00 | 0.00 | 0.00 | 213 |
+|        weather_related | 0.91 | 0.48 | 0.62 | 1509 |
+|                 floods | 0.92 | 0.42 | 0.58 | 460 |
+|                  storm | 0.87 | 0.08 | 0.15 | 487 |
+|                   fire | 0.35 | 0.27 | 0.31 | 44 |
+|             earthquake | 0.90 | 0.79 | 0.84 | 528 |
+|                   cold | 0.83 | 0.14 | 0.24 | 108 |
+|          other_weather | 0.14 | 0.00 | 0.01 | 281 |
+|          direct_report | 0.81 | 0.12 | 0.21 | 1029 |
+|            no_category | 0.00 | 0.00 | 0.00 | 1267 |
+|              micro avg | 0.64 | 0.49 | 0.56 | 18176 |
+|              macro avg | 0.56 | 0.22 | 0.25 | 18176 |
+|           weighted avg | 0.66 | 0.49 | 0.46 | 18176 |
+|            samples avg | 0.59 | 0.50 | 0.48 | 18176 |
 
 ## Licensing and Acknowledgements:
 
