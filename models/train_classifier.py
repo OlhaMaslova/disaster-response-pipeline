@@ -34,7 +34,7 @@ def load_data(database_filepath: str):
     """
     Loads data from the database file and splits it into X and y
     :param database_filepath: path to the database file
-    :return: X, y, category_names
+    :return: df, category_names
     """
     # create an SQLight engine
     engine = create_engine('sqlite:///{}'.format(database_filepath))
@@ -44,14 +44,60 @@ def load_data(database_filepath: str):
     # drop rows with incorrect data
     df = df[df.related != 2]
 
-    # split into X & y
-    X = df.message.to_numpy()
-    y = df.iloc[:, 4:].values
-
     # get category names
     category_names = list(df.columns[4:])
 
-    return X, y, category_names
+    return df, category_names
+
+
+def set_sample_ratio(x, counts):
+    avg = int(counts['full_count'].loc['avg'])
+    x = int(x)
+
+    if x >= avg:
+        return 1
+    else:
+        return int(np.round(avg / x))
+
+
+def get_sample_ratio(row, columns, counts):
+    ratio = 1
+
+    for i in range(4, len(row)):
+        if row[i]:
+            r = counts.calc_oversampling_ratio.loc[columns[i]]
+
+            if r > ratio:
+                ratio = r
+
+    return ratio
+
+
+def oversample(df):
+    # dataframe of labels
+    labels = df.iloc[:, 4:]
+    # compute how many messages are in each category
+    labels_sum = labels.sum()
+
+    # compute average count of messages per category
+    avg_val = np.mean(labels.sum())
+    avg_ser = pd.Series([avg_val], index=['avg'])
+
+    # df of counts
+    counts = labels_sum.append(avg_ser, ignore_index=False).sort_values(
+        ascending=False).to_frame()
+    counts.columns = ['full_count']
+    counts['calc_oversampling_ratio'] = counts['full_count'].apply(
+        set_sample_ratio, counts=counts)
+
+    rows = df.values.tolist()
+
+    columns = df.columns.tolist()
+    oversampled_rows = [row for row in rows for _ in range(
+        get_sample_ratio(row, columns, counts))]
+    df_oversampled = pd.DataFrame(oversampled_rows, columns=df.columns)
+
+    return df_oversampled
 
 
 def tokenize(text: str):
@@ -103,7 +149,7 @@ def build_model():
     cv = GridSearchCV(
         pipeline,
         param_grid=parameters,
-        scoring='f1_micro',
+        scoring='roc_auc',
         n_jobs=-1
     )
 
@@ -138,9 +184,23 @@ def main():
     if len(sys.argv) == 3:
         database_filepath, model_filepath = sys.argv[1:]
         print('Loading data...\n    DATABASE: {}'.format(database_filepath))
-        X, Y, category_names = load_data(database_filepath)
-        X_train, X_test, Y_train, Y_test = train_test_split(
-            X, Y, test_size=0.33)
+        df, category_names = load_data(database_filepath)
+
+        # train test split
+        msk = np.random.rand(len(df)) < 0.8
+        train = df[msk]
+        test = df[~msk]
+
+        # oversample
+        print('Oversampling...')
+        df_oversampled = oversample(train)
+
+        # X & Y split
+        X_train = df_oversampled.message.to_numpy()
+        Y_train = df_oversampled.iloc[:, 4:].values
+
+        X_test = test.message.to_numpy()
+        Y_test = test.iloc[:, 4:].values
 
         print('Building model...')
         model = build_model()
@@ -149,7 +209,7 @@ def main():
         model.fit(X_train, Y_train)
 
         # print('Loading model...')
-        # model = joblib.load("model/classifier.pkl")
+        # model = joblib.load("models/classifier.pkl")
 
         print('Evaluating model...')
         try:
