@@ -77,7 +77,7 @@ Web app that prompts users to enter a message and returns corresponding category
 | Category               | precision | recall | f1-score | support |
 | ---------------------- | --------- | ------ | -------- | ------- |
 | related                | 0.76      | 1.00   | 0.86     | 6532    |
-| request 0.84           | 0.18      | 0.29   | 1510     |
+| request                | 0.84      | 0.18   | 0.29     | 1510    |
 | offer                  | 0.00      | 0.00   | 0.00     | 48      |
 | aid_related            | 0.78      | 0.27   | 0.40     | 3578    |
 | medical_help           | 0.65      | 0.02   | 0.04     | 682     |
